@@ -1,1 +1,27 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+  <title>VibeInvest Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    body{background:#0f0f1a;color:white;text-align:center;padding-top:100px;font-family:sans-serif}
+    button{padding:12px 30px;background:#ff3d8a;color:white;border:none;border-radius:8px;cursor:pointer;margin-top:20px}
+  </style>
+</head>
+<body>
+  <h1>Welcome to VibeInvest Dashboard! 🚀</h1>
+  <p>You are logged in</p>
+  <button onclick="logout()">Logout</button>
+  <script>
+    const SUPABASE_URL = "PASTE_YOUR_URL_HERE"
+    const SUPABASE_ANON_KEY = "PASTE_YOUR_KEY_HERE"
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    async function logout(){
+      await supabase.auth.signOut()
+      window.location.href="login.html"
+    }
+  </script>
+</body>
+</html>
