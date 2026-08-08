@@ -9,7 +9,7 @@ async function signUp(){
   const {error}=await supabase.auth.signUp({email:e,password:p})
   document.getElementById('msg').innerText=error?error.message:"Check email to verify!"
 }
-async function login(){   window.location.href = "dashboard.html";
+
   const e=document.getElementById('email').value
   const p=document.getElementById('password').value
   const {error}=await supabase.auth.signInWithPassword({email:e,password:p})
