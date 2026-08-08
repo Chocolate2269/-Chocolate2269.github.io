@@ -15,6 +15,6 @@ async function login(){
  const p=document.getElementById('password').value
  const {error}=await supabase.auth.signInWithPassword({email:e,password:p})
  if(error)document.getElementById('msg').innerText=error.message
- else window.location.href="dashboard.html"
+ else window.loca
 }
 
