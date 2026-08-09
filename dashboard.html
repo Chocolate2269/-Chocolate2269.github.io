@@ -2,46 +2,43 @@
 <html>
 <head>
   <title>VibeInvest Dashboard</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <style>
-    body { font-family: Arial; background: #0f172a; color: white; text-align: center; padding: 50px 20px; }
-    .card { background: #1e293b; padding: 30px; border-radius: 15px; max-width: 400px; margin: auto; }
-    .balance { font-size: 40px; color: #22c55e; margin: 20px 0; }
-    button { background: #22c55e; color: white; border: none; padding: 12px 30px; border-radius: 8px; font-size: 16px; margin: 10px; cursor: pointer; }
-    button.logout { background: #ef4444; }
+    body { background: #0f172a; color: white; font-family: Arial; text-align: center; padding: 20px; }
+    .card { background: #1e293b; padding: 30px; border-radius: 10px; max-width: 400px; margin: auto; }
+    .balance { font-size: 30px; color: #22c55e; }
+    button { background: #2563eb; color: white; border: none; padding: 10px 20px; border-radius: 5px; margin: 5px; cursor: pointer; }
+    .logout { background: #ef4444; }
   </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Welcome to VibeInvest 🚀</h1>
+    <p id="user-email">Loading...</p>
+    <div class="balance">$0.00</div>
+    <p>Your Current Balance</p>
+    <button onclick="alert('Invest feature coming soon!')">Start Investing</button>
+    <button class="logout" onclick="logout()">Logout</button>
+  </div>
 
-<!-- 2. DASHBOARD DESIGN -->
-<div class="card">
-  <h1>Welcome to VibeInvest 🚀</h1>
-  <p id="user-email">Loading...</p>
-  
-  <div class="balance">$0.00</div>
-  <p>Your Current Balance</p>
-  
-  <button onclick="alert('Invest feature coming soon!')">Start Investing</button>
-  <button class="logout" onclick="logout()">Logout</button>
-</div>
-
-<!-- 3. CHECK LOGIN + LOGOUT CODE -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
-// Check if user is logged in. If not, send back to login page
-async function checkUser() {
-  const { data: { user } = await supabase.auth.getUser()
-  if (!user) {
-    window.location.href = 'index.html' // back to login
-  } else {
-    document.getElementById('user-email').innerText = user.email // show email
+  // ⚠️ PUT YOUR REAL KEYS HERE ONLY
+  const SUPABASE_URL = 'https://fjy...supabase.co'
+  const SUPABASE_ANON_KEY = 'eyJhb...your-long-key'
+
+  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+  // Show user email
+  supabase.auth.getUser().then(({ data: { user } }) => {
+    if(user) document.getElementById('user-email').innerText = user.email
+    else window.location.href = 'index.html'
+  })
+
+  // Logout function
+  async function logout(){
+    await supabase.auth.signOut()
+    window.location.href = 'index.html'
   }
-}
-checkUser()
-
-// Logout function
-async function logout() {
-  await supabase.auth.signOut()
-  window.location.href = 'index.html'
-}
 </script>
-
 </body>
 </html>
